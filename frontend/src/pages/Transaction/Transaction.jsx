@@ -2,7 +2,7 @@ import MainLayout from "../../layouts/MainLayout";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { getComponents } from "../../services/componentService";
-import axios from "axios";
+import api from "../../services/api";
 
 function Transaction() {
 
@@ -119,23 +119,14 @@ function Transaction() {
 
     try {
 
-      await axios.post(
-
-        "http://localhost:5000/api/transaction/bulk",
-
-        {
-
-          updatedBy:
-
-            localStorage.getItem("adminName"),
-
-          purpose,
-
-          transactions
-
-        }
-
-      );
+      await api.post(
+  "/api/transaction/bulk",
+  {
+    updatedBy: localStorage.getItem("adminName"),
+    purpose,
+    transactions
+  }
+);
 
       toast.success("Transaction Completed");
 
