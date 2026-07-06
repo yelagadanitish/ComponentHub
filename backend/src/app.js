@@ -39,6 +39,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
+      "https://component-hub.vercel.app",
     ],
     credentials: true,
   })
