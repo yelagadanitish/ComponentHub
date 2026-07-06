@@ -1,16 +1,16 @@
 import api from "./api";
 
 export const createKit = (data) =>
-  api.post("/kits", data);
+  api.post("/api/kits", data);
 
 export const getAllKits = () =>
-  api.get("/kits");
+  api.get("/api/kits");
 
 export const getKit = (id) =>
-  api.get(`/kits/${id}`);
+  api.get(`/api/kits/${id}`);
 
 export const updateKit = (id, data) =>
-  api.put(`/kits/${id}`, data);
+  api.put(`/api/kits/${id}`, data);
 
 export const deleteKit = (id) =>
-  api.delete(`/kits/${id}`);
+  api.delete(`/api/kits/${id}`);

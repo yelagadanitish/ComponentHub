@@ -1,5 +1,5 @@
 import api from "./api";
 
 export const getDashboard = async () => {
-  return await api.get("/dashboard");
+  return await api.get("/api/dashboard");
 };

@@ -7,7 +7,7 @@ export const uploadImage = async (componentName, image) => {
   formData.append("componentName", componentName);
   formData.append("image", image);
 
-  return await api.post("/image", formData, {
+  return await api.post("/api/image", formData, {
     headers: {
       "Content-Type": "multipart/form-data",
     },
@@ -16,5 +16,5 @@ export const uploadImage = async (componentName, image) => {
 };
 
 export const getImage = async (componentName) => {
-  return await api.get(`/image/${componentName}`);
+  return await api.get(`/api/image/${componentName}`);
 };

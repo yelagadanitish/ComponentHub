@@ -7,7 +7,7 @@ export const uploadKitImage = async (image) => {
   formData.append("image", image);
 
   const response = await api.post(
-    "/kit-images",
+    "/api/kit-images",
     formData,
     {
       headers: {
