@@ -37,14 +37,23 @@ const kitImageRoutes = require("./routes/kitImageRoutes");
 
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "https://component-hub.vercel.app",
-    ],
+    origin: function (origin, callback) {
+      // Allow requests with no origin (Postman, curl, etc.)
+      if (!origin) return callback(null, true);
+
+      if (
+        origin === "http://localhost:5173" ||
+        origin === "https://component-hub.vercel.app" ||
+        origin.endsWith(".vercel.app")
+      ) {
+        return callback(null, true);
+      }
+
+      return callback(new Error("Not allowed by CORS"));
+    },
     credentials: true,
   })
 );
-
 
 app.use(express.json());
 app.use(morgan("dev"));
