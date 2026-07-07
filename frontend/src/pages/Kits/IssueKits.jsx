@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import MainLayout from "../../layouts/MainLayout";
 import toast from "react-hot-toast";
-import axios from "axios";
+import api from "../../services/api";
 
 import { getAllKits } from "../../services/kitService";
 
@@ -153,29 +153,21 @@ const issueKits = async()=>{
 
 try{
 
-await axios.post(
+await api.post(
 
-"http://localhost:5000/api/kits/issue",
+"/api/kits/issue",
 
 {
 
-kits:
+kits: selectedKits.map(item => ({
 
-selectedKits.map(
+kitId: item._id,
 
-item=>({
+quantity: item.issueQuantity
 
-kitId:item._id,
+})),
 
-quantity:item.issueQuantity
-
-})
-
-),
-
-issuedBy:
-
-adminName
+issuedBy: adminName
 
 }
 
