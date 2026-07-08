@@ -3,6 +3,8 @@ import MainLayout from "../../layouts/MainLayout";
 import toast from "react-hot-toast";
 import api from "../../services/api";
 
+import KitModal from "../../components/kits/KitModal";
+
 import { getAllKits } from "../../services/kitService";
 
 function IssueKits() {
@@ -199,6 +201,17 @@ error.response?.data?.message ||
 
 };
 
+const [selectedKit, setSelectedKit] = useState(null);
+
+const [isModalOpen, setIsModalOpen] = useState(false);
+
+const handleView = (kit) => {
+
+  setSelectedKit(kit);
+
+  setIsModalOpen(true);
+
+};
 return (
 
 <MainLayout>
@@ -275,21 +288,52 @@ Available :
 
 </p>
 
-<button
+<div className="flex gap-3 mt-5">
 
-onClick={()=>
+  <button
 
-addKit(kit)
+    onClick={() => handleView(kit)}
 
-}
+    className="
+    flex-1
+    border
+    border-blue-600
+    text-blue-600
+    hover:bg-blue-50
+    py-3
+    rounded-xl
+    font-medium
+    duration-300
+    "
 
-className="w-full mt-5 bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl"
+  >
 
->
+    View Kit
 
-Add To Issue
+  </button>
 
-</button>
+  <button
+
+    onClick={() => addKit(kit)}
+
+    className="
+    flex-1
+    bg-blue-600
+    hover:bg-blue-700
+    text-white
+    py-3
+    rounded-xl
+    font-medium
+    duration-300
+    "
+
+  >
+
+    Add To Issue
+
+  </button>
+
+</div>
 
 </div>
 
@@ -401,6 +445,16 @@ Issue Selected Kits
 }
 
 </div>
+
+<KitModal
+
+  isOpen={isModalOpen}
+
+  onClose={() => setIsModalOpen(false)}
+
+  kit={selectedKit}
+
+/>
 
 </MainLayout>
 
