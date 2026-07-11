@@ -127,8 +127,16 @@ const addTransaction = async (req, res) => {
 
     // Add Transaction
 
-    const currentDateTime =
-      new Date().toLocaleString();
+   const currentDateTime = new Date().toLocaleString("en-IN", {
+  timeZone: "Asia/Kolkata",
+  day: "2-digit",
+  month: "2-digit",
+  year: "numeric",
+  hour: "2-digit",
+  minute: "2-digit",
+  second: "2-digit",
+  hour12: true,
+});
 
     await sheets.spreadsheets.values.append({
 
@@ -309,12 +317,17 @@ const bulkTransaction = async (req, res) => {
 
       // Transaction Entry
 
-      const now = new Date();
-
-      const date = now.toLocaleDateString();
-
-      const time = now.toLocaleTimeString();
-
+      const currentDateTime = new Date().toLocaleString("en-IN", {
+  timeZone: "Asia/Kolkata",
+  day: "2-digit",
+  month: "2-digit",
+  year: "numeric",
+  hour: "2-digit",
+  minute: "2-digit",
+  second: "2-digit",
+  hour12: true,
+});
+      
       await sheets.spreadsheets.values.append({
 
         spreadsheetId: process.env.SHEET_ID,
@@ -335,7 +348,7 @@ const bulkTransaction = async (req, res) => {
 
             purpose,
 
-            `${date} ${time}`,
+            currentDateTime,
 
             updatedBy
 
